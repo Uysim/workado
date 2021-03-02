@@ -1,0 +1,17 @@
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
+  def change
+    create_table :workado_workspaces do |t|
+      t.string :name
+      t.timestamps
+    end
+
+    create_table :workado_workspace_users do |t|
+      t.references :workspace, foreign_key: { to_table: :workado_workspaces }
+      t.references :user, polymorphic: true
+      t.string :role
+      t.datetime :accepted_at
+      t.string :acceptable_token
+      t.timestamps
+    end
+  end
+end
